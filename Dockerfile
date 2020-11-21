@@ -4,11 +4,10 @@ FROM openjdk:8-alpine
 ENV SFS_VERSION 2_14_0
 ENV SFS_PATCH 2.16.3
 
-RUN wget -q -O - https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS_VERSION}.tar.gz | tar  -C /opt -xzvf -
-
-# Swap out the java included with SFS with distro java
-# This allows for ARM builds.
-RUN rm -rf /opt/SmartFoxServer_2X/jre \
+RUN wget -q -O - https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS_VERSION}.tar.gz | tar  -C /opt -xzvf - \
+    # Swap out the java included with SFS with distro java
+    # This allows for ARM builds.
+    && rm -rf /opt/SmartFoxServer_2X/jre \
     && ln -s /usr/lib/jvm/default-jvm/jre /opt/SmartFoxServer_2X/jre
 
 WORKDIR /opt/SmartFoxServer_2X
