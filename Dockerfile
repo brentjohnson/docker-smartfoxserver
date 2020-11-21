@@ -1,15 +1,19 @@
-FROM centos:latest
+# Using openjdk as base image to support ARM builds
+FROM openjdk:8-alpine
 
 ENV SFS_VERSION 2_14_0
 ENV SFS_PATCH 2.16.3
 
-RUN yum install -y unzip
+RUN wget -q -O - https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS_VERSION}.tar.gz | tar  -C /opt -xzvf -
 
-RUN curl -s https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS_VERSION}.tar.gz | tar  -C /opt -xzvf -
+# Swap out the java included with SFS with distro java
+# This allows for ARM builds.
+RUN rm -rf /opt/SmartFoxServer_2X/jre \
+    && ln -s /usr/lib/jvm/default-jvm/jre /opt/SmartFoxServer_2X/jre
 
 WORKDIR /opt/SmartFoxServer_2X
 
-RUN curl -sO https://www.smartfoxserver.com/downloads/sfs2x/patches/SFS2X-Patch-${SFS_PATCH}.zip \
+RUN wget -q https://www.smartfoxserver.com/downloads/sfs2x/patches/SFS2X-Patch-${SFS_PATCH}.zip \
     && unzip SFS2X-Patch-${SFS_PATCH}.zip \
     && cd SFS2X-Patch-${SFS_PATCH} \
     && ./install-linux.sh \
