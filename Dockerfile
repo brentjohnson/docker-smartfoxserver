@@ -2,7 +2,7 @@
 FROM openjdk:8-alpine
 
 ENV SFS_VERSION 2_17_0
-#ENV SFS_PATCH 2.16.3
+ENV SFS_PATCH 2.17.3
 
 RUN wget -q -O - https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS_VERSION}.tar.gz | tar  -C /opt -xzvf - \
     # Swap out the java included with SFS with distro java
@@ -10,14 +10,14 @@ RUN wget -q -O - https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS
     && rm -rf /opt/SmartFoxServer_2X/jre \
     && ln -s /usr/lib/jvm/default-jvm/jre /opt/SmartFoxServer_2X/jre
 
-#WORKDIR /opt/SmartFoxServer_2X
-#
-#RUN wget -q https://www.smartfoxserver.com/downloads/sfs2x/patches/SFS2X-Patch-${SFS_PATCH}.zip \
-#    && unzip SFS2X-Patch-${SFS_PATCH}.zip \
-#    && cd SFS2X-Patch-${SFS_PATCH} \
-#    && ./install-linux.sh \
-#    && cd .. \
-#    && rm -rf SFS2X-Patch-${SFS_UPDATE}.zip SFS2X-Patch-${SFS_PATCH}
+WORKDIR /opt/SmartFoxServer_2X
+
+RUN wget -q https://www.smartfoxserver.com/downloads/sfs2x/patches/SFS2X-Patch-${SFS_PATCH}.zip \
+    && unzip SFS2X-Patch-${SFS_PATCH}.zip \
+    && cd SFS2X-Patch-${SFS_PATCH} \
+    && ./install-linux.sh \
+    && cd .. \
+    && rm -rf SFS2X-Patch-${SFS_UPDATE}.zip SFS2X-Patch-${SFS_PATCH}
 
 EXPOSE 8080 8443 9933
 
