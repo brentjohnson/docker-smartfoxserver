@@ -19,7 +19,7 @@ RUN wget -q https://www.smartfoxserver.com/downloads/sfs2x/patches/SFS2X-Patch-$
 && cd SFS2X-Patch-${SFS_PATCH} \
 && ./install-linux.sh \
 && cd .. \
-&& rm -rf SFS2X-Patch-${SFS_UPDATE}.zip SFS2X-Patch-${SFS_PATCH}
+&& rm -rf SFS2X-Patch-${SFS_PATCH}.zip SFS2X-Patch-${SFS_PATCH}
 
 EXPOSE 8080 8443 9933
 
