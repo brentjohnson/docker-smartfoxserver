@@ -11,7 +11,7 @@ Thanks to its simplicity of use, versatility and performance, it currently power
 # TL;DR
 
 ```console
-$ docker run --name sfs -p 8080:8080 -p 9933:9933 bijohns/smartfoxserver:latest
+$ docker run --name sfs -p 8080:8080 -p 9933:9933 brentjohnson/smartfoxserver:latest
 ```
 
 ## Using Docker Compose
@@ -22,7 +22,7 @@ This is an example of using docker compose to run the HTLM5 version of the [Tris
 version: "3.8"
 services:
   sfs:
-    image: "bijohns/smartfoxserver:latest"
+    image: "brentjohnson/smartfoxserver:latest"
     volumes:
       - ./deploy/extensions/Tris-JS:/opt/SmartFoxServer_2X/SFS2X/extensions/Tris-JS
     ports:
