@@ -4,7 +4,7 @@ FROM bitnami/java:11
 RUN /usr/sbin/install_packages unzip
 
 ENV SFS_VERSION 2_19_0
-ENV SFS_PATCH 2.20.0
+ENV SFS_PATCH 2.20.7
 
 RUN wget -q -O - https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS_VERSION}.tar.gz | tar  -C /opt -xzvf - \
 # Swap out the java included with SFS with distro java
