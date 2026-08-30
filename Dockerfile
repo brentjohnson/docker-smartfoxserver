@@ -1,7 +1,7 @@
 # Using java as base image to support ARM builds
 FROM eclipse-temurin:11
 
-RUN /usr/sbin/install_packages unzip
+RUN apt-get update && apt-get install -y --no-install-recommends unzip && rm -rf /var/lib/apt/lists/*
 
 ENV SFS_VERSION 2_19_0
 ENV SFS_PATCH 2.20.7
@@ -10,7 +10,7 @@ RUN wget -q -O - https://www.smartfoxserver.com/downloads/sfs2x/SFS2X_unix_${SFS
 # Swap out the java included with SFS with distro java
 # This allows for ARM builds.
 && rm -rf /opt/SmartFoxServer_2X/jre \
-&& ln -s /opt/bitnami/java /opt/SmartFoxServer_2X/jre
+&& ln -s /opt/java/openjdk /opt/SmartFoxServer_2X/jre
 
 WORKDIR /opt/SmartFoxServer_2X
 
