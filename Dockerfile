@@ -1,5 +1,5 @@
 # Using java as base image to support ARM builds
-FROM bitnami/java:11
+FROM eclipse-temurin:11
 
 RUN /usr/sbin/install_packages unzip
 
